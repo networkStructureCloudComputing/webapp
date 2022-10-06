@@ -1,6 +1,3 @@
-# Webservice
-``Restful API - Node.js``
-
 ## About the project
 Created a web service using REST API and performed CRU operation using HTTP
 
@@ -22,7 +19,7 @@ Created a web service using REST API and performed CRU operation using HTTP
       - Description: Simple GET api to test (Same as assignment 1).
       - url : /healthz
 
-* /v1/user :
+* /v1/account :
   
   - *Methods: POST* : 
       - url : /v1/account
@@ -30,12 +27,12 @@ Created a web service using REST API and performed CRU operation using HTTP
       - Description: Create a new user and store in database
 
   - *Methods: GET* : 
-      - url : /v1/account/id
+      - url : /v1/account/{accountId}
       - Body: none
       - Description: Fetch data from database
 
   - *Methods: PUT* : 
-      - url : /v1/account/id	
+      - url : /v1/account/{accountId}	
       - Body: first_name, last_name, password
       - Description: Update a user details in database
 
@@ -65,7 +62,3 @@ Created a web service using REST API and performed CRU operation using HTTP
 ## External Libraries
 * bycrypt
 * supertest
-
-
-
-Workflow rule testing
