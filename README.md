@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-# Webservice_change
-=======
-# Webservice_change_updated
->>>>>>> parent of bca1971 (Updated Readme)
-=======
-# Webservice_change
->>>>>>> parent of af1d150 (Merge pull request #9 from spmujumdarNEU/Assignment-02)
-``Restful API - Node.js``
-
 ## About the project
 Created a web service using REST API and performed CRU operation using HTTP
 
