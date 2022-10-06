@@ -14,8 +14,8 @@ app.use(express.json());
 
 //Routes
 app.post("/v1/account", createUser);
-app.put("/v1/account/id", updateUser);
-app.get("/v1/account/id", viewUser);
+app.put("/v1/account/:accountId", updateUser);
+app.get("/v1/account/:accountId", viewUser);
 app.get("/healthz", (req, res) => {
     try {
         res.status(200).json("server responds with 200 OK if it is healhty.")
