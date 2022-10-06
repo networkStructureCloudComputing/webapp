@@ -4,10 +4,7 @@
   "description": "A Node.js Restful API Endpoints",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint *.js",
-    "start": "nodemon index",
-    "test": "jest --testTimeout=10000",
-    "pretest": "cross-env NODE_ENV=test"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "node",
@@ -17,23 +14,6 @@
   "author": "Sushrut Mujumdar",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.1",
-    "bcrypt": "^5.0.1",
-    "cors": "^2.8.5",
-    "eslint": "^8.8.0",
-    "nodemon": "^2.0.15",
-    "pg": "^8.7.3",
-    "uuid": "^8.3.2"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "coveragePathIgnorePatterns": [
-      "/node_modules/"
-    ]
-  },
-  "devDependencies": {
-    "cross-env": "^7.0.3",
-    "jest": "^27.5.1",
-    "supertest": "^6.2.2"
+    "express": "^4.18.1"
   }
 }
