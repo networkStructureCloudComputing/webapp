@@ -1,6 +1,3 @@
-# Webservices
-``Restful API - Node.js``
-
 ## About the project
 Created a web service using REST API and performed CRU operation using HTTP
 
@@ -54,7 +51,7 @@ Created a web service using REST API and performed CRU operation using HTTP
 * *tests/api.test.js* : Contains unit test for api test
 * *tests/helper.test.js* : Contains unit test for helper function test
 * *utils/helper.js* : Modules for password hash, basic auth and email validation
-* *workflow/simple.js* : Github action workflow
+* *workflow/test.js.yml* : Github action unit tests workflow
   
 ## Teach Stack
 * NodeJs
