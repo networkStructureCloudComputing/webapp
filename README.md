@@ -19,7 +19,7 @@ Created a web service using REST API and performed CRU operation using HTTP
       - Description: Simple GET api to test (Same as assignment 1).
       - url : /healthz
 
-* /v1/user :
+* /v1/account :
   
   - *Methods: POST* : 
       - url : /v1/account
