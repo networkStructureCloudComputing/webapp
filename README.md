@@ -51,6 +51,11 @@ Created a web service using REST API and performed CRU operation using HTTP
 * *tests/api.test.js* : Contains unit test for api test
 * *tests/helper.test.js* : Contains unit test for helper function test
 * *utils/helper.js* : Modules for password hash, basic auth and email validation
+* *packer/app.sh: Shell scripting to install and start node application service
+* *packer/postgres.sh: Shell scripting to install and start postgresql service
+* *packer/var.json: Contain parameter key and value of packer building file
+* *packer/nodeApi.service: Perform micro service of maintain the working of node application
+* *packer/nodeApi.pkr.hcl: Perform packer activity to build ec2 instances
   
 ## Teach Stack
 * NodeJs
