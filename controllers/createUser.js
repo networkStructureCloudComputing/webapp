@@ -12,12 +12,11 @@ const pool = require("../db");
 const createUser = (req, res) => {
     const fieldNeeded = ["first_name", "last_name", "username", "password", "account_created","account_updated"];
     const reqKey = req.body ? Object.keys(req.body) : null;
-    
+
     if (!reqKey || !reqKey.length) {
-        console.log(req.body);
-        return res.status(400).json("Inappropriate Input");
+        return res.status(400).json("No information is provided to create user");
     }
-    
+
     let checking = true;
 
     reqKey.forEach(val => {
@@ -43,17 +42,17 @@ const createUser = (req, res) => {
 
     const isEmailCorrect = validateEmail(username);
 
-    if (!first_name || !last_name || !username || !password  || password.length < 8 || !first_name.length || !last_name.length) {
-        return res.status(400).json("Insufficient Input Data");
+    if (!password || !username || !first_name || !last_name || password.length < 8 || !first_name.length || !last_name.length) {
+        return res.status(400).json("Incorrect data format");
     }
 
     if (!isEmailCorrect) {
-        return res.status(400).json("Enter valid email address");
+        return res.status(400).json("Enter proper email");
     }
 
     generatePasswordHash(password)
         .then((hashPassword) => {
-            let queries = "SELECT * FROM users WHERE username = $1";
+            let queries = "Select * from users where username = $1";
             pool.query(queries, [username], (err, result) => {
                 if (!result.rowCount) {
                     queries = "INSERT INTO users(first_name, last_name, password, username, account_created, account_updated, id) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id, first_name, last_name, username, account_created, account_updated";
@@ -66,7 +65,7 @@ const createUser = (req, res) => {
                         }
                     })
                 } else {
-                    return res.status(400).json("Username already exists in database");
+                    return res.status(400).json("Username already in used");
                 }
             })
         });

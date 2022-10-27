@@ -10,10 +10,10 @@ const updateUser = (req, res) => {
     const [username, password] = basicAuth(req);
 
     if (!username || !password) {
-        return res.status(403).json("Invalid Details");
+        return res.status(403).json("Forbidden Request");
     }
 
-    let queries = "SELECT password FROM users WHERE username = $1";
+    let queries = "SELECT password from users where username = $1";
     let values = [username];
 
     pool.query(queries, values)
@@ -27,11 +27,11 @@ const updateUser = (req, res) => {
                         if (compareValue) {
                             updateData(req, res, username);
                         } else {
-                            return res.status(401).json("Invalid Password");
+                            return res.status(401).json("Incorrect Password");
                         }
                     })
             } else {
-                return res.status(401).json("Invalid Username");
+                return res.status(401).json("Username Incorrect");
             }
         })
         .catch(err => {
@@ -56,7 +56,7 @@ const updateData = (req, res, username) => {
     })
 
     if (!checking) {
-        return res.status(400).json("Enter First Name, Last Name, and Password details only");
+        return res.status(400).json("Only first_name, last_name, and password is required");
     }
 
     const account_updated = new Date().toISOString();
@@ -66,7 +66,7 @@ const updateData = (req, res, username) => {
         password
     } = req.body;
     if ((password && password.length < 8) || (first_name && !first_name.length) || (last_name && !last_name.length)) {
-        return res.status(400).json("Inappropriate Details");
+        return res.status(400).json("Incorrect data format");
     }
 
     if (password) {
@@ -86,14 +86,13 @@ const updatingQuery = (req, res, username, account_updated) => {
     const dataTuples = dKeys.map((k, index) => `${k} = $${index + 1}`);
     const updates = dataTuples.join(", ");
 
-    const queries = `UPDATE users SET ${updates} WHERE username = $${dKeys.length +  1}`;
+    const queries = `UPDATE users SET ${updates} where username = $${dKeys.length +  1}`;
     const values = [...Object.values(req.body), account_updated, username];
     
     pool.query(queries, values, (err, result) => {
         if (err) {
-            res.status(400).json("Error! Update Failed");
+            res.status(400).json("Error updating data to database while creating user");
         } else {
-            //console.log("Details Modified");
             res.status(204).json(result.rows[0])
         }
     })

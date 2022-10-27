@@ -126,10 +126,6 @@ build {
   }
 
   provisioner "shell" {
-    script = "./postgres.sh"
-  }
-
-  provisioner "shell" {
     script = "./app.sh"
   }
 }
