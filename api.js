@@ -1,10 +1,17 @@
 const express = require('express');
+const fileUpload = require("express-fileupload");
 const app = express();
+app.use(fileUpload());
 const {
     createUser,
     updateUser,
-    viewUser
+    viewUser,
+    uploadDoc,
+    getDocumentData,
+    getAllData,
+    deleteDoc
 } = require("./controllers");
+
 
 const cors = require("cors");
 
@@ -16,6 +23,10 @@ app.use(express.json());
 app.post("/v1/account", createUser);
 app.put("/v1/account/:accountId", updateUser);
 app.get("/v1/account/:accountId", viewUser);
+app.post("/v1/documents", uploadDoc);
+app.get("/v1/documents/:doc_id", getDocumentData);
+app.get("/v1/documents", getAllData);
+app.delete("/v1/documents/:doc_id", deleteDoc);
 app.get("/healthz", (req, res) => {
     try {
         res.status(200).json("server responds with 200 OK if it is healhty.")
@@ -24,6 +35,6 @@ app.get("/healthz", (req, res) => {
     }
 });
 app.get('*', function (req, res) {
-    res.status(404).json("Page not found")
+    res.status(404).json("Page not found!")
 });
 module.exports = app;
