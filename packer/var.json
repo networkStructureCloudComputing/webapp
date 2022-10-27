@@ -5,7 +5,7 @@
     "subnet_id": "subnet-04024e6398b622e66",
     "instance_type": "t2.micro",
     "ssh_name": "ubuntu",
-    "demo_account_id": "173348555085",
+    "demo_account_id": "815142323057",
     "zip_file_path": "",
     "device_delete_on_termination": "true",
     "device_name": "/dev/sdp",

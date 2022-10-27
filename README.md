@@ -71,7 +71,7 @@
       - Description: Simple GET api to test.
       - url : /healthz
 
-* /v1/user :
+* /v1/account :
   
   - *Methods: GET* : 
       - Description: Get User Data.
@@ -126,9 +126,3 @@
 ## External Libraries
 * bycrypt
 * supertest
-* packer
-* express-fileupload
-* dotenv
-* aws-sdk
-* uuid
-* jest
