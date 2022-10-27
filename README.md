@@ -100,6 +100,29 @@
       - Description: Delete Image Data.
       - Query Strings: none
       - url : /v1/user/self/pic
+
+* /v1/documents :
+  
+  - *Methods: POST* : 
+      - url : /v1/documents
+      - Body: file
+      - Description: Uplaod a file
+
+  - *Methods: GET* : 
+      - url : /v1/documents
+      - Body: none
+      - Description: Fetch all files
+      
+  - *Methods: GET* : 
+      - url : /v1/documents/{doc_id}
+      - Body: none
+      - Description: Fetch file based on ID     
+
+  - *Methods: DELETE* : 
+      - url : /v1/documents/{doc_id}	
+      - Body: none
+      - Description: Delete file from S3 bucket
+      
 ## External Libraries
 * bycrypt
 * supertest
