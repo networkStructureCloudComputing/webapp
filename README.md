@@ -85,21 +85,6 @@
       - Description: Update a user.
       - Body: first_name, last_name, password
       - url : /v1/user/self
-  
-* /v1/user/pic :
-  
-  - *Methods: GET* : 
-      - Description: Get Image Data.
-      - Query Strings: none
-      - url : /v1/user/self/pic
-  - *Methods: POST* : 
-      - Description: Upload Image Data.
-      - Body: Multi-part form data binary string
-      - url : /v1/user/self/pic
-  - *Methods: DEL* : 
-      - Description: Delete Image Data.
-      - Query Strings: none
-      - url : /v1/user/self/pic
 
 * /v1/documents :
   
