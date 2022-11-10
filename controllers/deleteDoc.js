@@ -68,7 +68,6 @@ const deleteDocData = (res, user_id) => {
                         pool.query(queries, values)
                             .then(results => {
                                 return res.status(204).json(results.rows[0]);
-                                
                             })
                     }
                 })
