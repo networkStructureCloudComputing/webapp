@@ -1,5 +1,7 @@
 const pool = require("../db");
-
+const logger = require('../logger');
+const StatsD = require('statsd-client');
+sdc = new StatsD({host: 'localhost', port: 8125});
 const {
     basicAuth,
     comparePassword
@@ -14,6 +16,7 @@ const s3 = new AWS.S3({
 });
 
 const deleteDoc = (req, res) => {
+    sdc.increment('endpoint.user.get - deleteDoc');
     const [username, password] = basicAuth(req);
     let file_id = req.params.doc_id;
     if (!username || !password) {
@@ -57,6 +60,7 @@ const deleteDocData = (res, user_id) => {
                     Bucket: bucketName,
                     Key: result.rows[0].path
                 }, (err, data) => {
+                    logger.info("Document Delete");
                     if (err) {
                         return res.status(400).json(err);
                     } else {
@@ -64,6 +68,7 @@ const deleteDocData = (res, user_id) => {
                         pool.query(queries, values)
                             .then(results => {
                                 return res.status(204).json(results.rows[0]);
+                                
                             })
                     }
                 })

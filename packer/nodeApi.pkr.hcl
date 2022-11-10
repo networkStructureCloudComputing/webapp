@@ -128,4 +128,8 @@ build {
   provisioner "shell" {
     script = "./app.sh"
   }
+
+  provisioner "shell" {
+    script = "./cloudwatch.sh"
+  }
 }

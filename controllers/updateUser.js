@@ -1,5 +1,7 @@
 const pool = require("../db");
-
+const logger = require('../logger');
+const StatsD = require('statsd-client');
+sdc = new StatsD({host: 'localhost', port: 8125});
 const {
     generatePasswordHash,
     basicAuth,
@@ -7,6 +9,7 @@ const {
 } = require("../utils/helper");
 
 const updateUser = (req, res) => {
+    sdc.increment('endpoint.user.get - updateUser');
     const [username, password] = basicAuth(req);
 
     if (!username || !password) {
@@ -56,6 +59,7 @@ const updateData = (req, res, username) => {
     })
 
     if (!checking) {
+        logger.info("Wrong details provided");
         return res.status(400).json("Only first_name, last_name, and password is required");
     }
 
@@ -81,6 +85,7 @@ const updateData = (req, res, username) => {
 }
 
 const updatingQuery = (req, res, username, account_updated) => {
+    logger.info("User update started");
     const dKeys = Object.keys(req.body);
     dKeys.push("account_updated");
     const dataTuples = dKeys.map((k, index) => `${k} = $${index + 1}`);
