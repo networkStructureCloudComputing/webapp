@@ -1,5 +1,7 @@
 const pool = require("../db");
-
+const logger = require('../logger');
+const StatsD = require('statsd-client');
+sdc = new StatsD({host: 'localhost', port: 8125});
 const {
     basicAuth,
     comparePassword
@@ -18,6 +20,8 @@ const s3 = new AWS.S3({
 });
 
 const uploadDoc = (req, res) => {
+    sdc.increment('endpoint.user.get - uploadDoc');
+    logger.info("Authentication Stage for file upload");
     const [username, password] = basicAuth(req);
     console.log(req);
     if (!username || !password) {
@@ -79,6 +83,7 @@ const uploadDocData = (req, res, user_id) => {
         }
     }
     s3.upload(params, (err, data) => {
+        logger.info("Upload Started");
         if (err) {
             throw (err);
         }

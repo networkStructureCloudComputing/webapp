@@ -1,11 +1,14 @@
 const pool = require("../db");
-
+const logger = require('../logger');
+const StatsD = require('statsd-client');
+sdc = new StatsD({host: 'localhost', port: 8125});
 const {
     basicAuth,
     comparePassword
 } = require("../utils/helper");
 
 const getDocumentData = (req, res) => {
+    sdc.increment('endpoint.user.get - getDoc');
     const [username, password] = basicAuth(req);
     let file_id = req.params.doc_id;
     if (!username || !password) {
@@ -40,6 +43,7 @@ const getDocumentData = (req, res) => {
 }
 
 const getDocData = (req, res, user_id) => {
+    logger.info("Fetching Documents");
     let queries = "Select file_name, id, s3_bucket_path, upload_date, user_id from documents where id = $1"
     let values = [user_id]
     pool.query(queries, values)

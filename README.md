@@ -24,12 +24,15 @@
 ## Project Structure
 * *api.js* : It has it's logic to create server http, routing system and the API services.
 * *db.js* : It has database client information
+* *logger.js*: Contain logger configuration of the application
+* *amazon-cloudwatch-agent.json*: Contain cloudWatch configuration
 * *controllers/createUser.js* : Main logic for creating users that includes create query
 * *controllers/updateUser.js* : Main logic for updating users that includes update query
 * *controllers/viewUser.js* : Main logic for view users that includes select query
-* *controllers/uploadImg.js* : Main logic for uploading image to S3 that includes select, and delete query
-* *controllers/getImg.js* : Main logic for viewing the exiting image in S3 that includes select query
-* *controllers/deleteImg.js* : Main logic for deleting the exiting image from S3 that includes select, and delete query
+* *controllers/uploadDoc.js* : Main logic for uploading docs to S3 that includes select, and delete query
+* *controllers/getDoc.js* : Main logic for viewing the exiting docs in S3 that includes select query
+* *controllers/deleteDoc.js* : Main logic for deleting the exiting doc from S3 that includes select, and delete query
+* *controllers/getAllData.js* : Main logic for fetch the all exiting doc from S3
 * *tests/api.test.js* : Contains unit test for api test
 * *tests/helper.test.js* : Contains unit test for helper function test
 * *.github/workflows/eslint.js.yml*: Perform eslint test workflow
@@ -41,6 +44,7 @@
 * *packer/var.json*: Contain parameter key and value of packer building file
 * *packer/nodeApi.service*: Perform micro service of maintain the working of node application
 * *packer/nodeApi.pkr.hcl*: Perform packer activity to build ec2 instances
+* *packer/cloudwatch.sh*: Shell scripting to install and start cloudwatch agent
   
 ## Teach Stack
 * NodeJs

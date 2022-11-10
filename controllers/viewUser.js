@@ -1,14 +1,18 @@
 const pool = require("../db");
-
+const logger = require('../logger');
+const StatsD = require('statsd-client');
+sdc = new StatsD({host: 'localhost', port: 8125});
 const {
     basicAuth,
     comparePassword
 } = require("../utils/helper");
 
 const viewUser = (req, res) => {
+    sdc.increment('endpoint.user.get - viewUser');
     const [username, password] = basicAuth(req);
-
+    logger.info("User Display");
     if (!username || !password) {
+        logger.info("Incorrect Information provided");
         return res.status(403).json("Forbidden Request");
     }
 
