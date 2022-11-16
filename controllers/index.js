@@ -4,7 +4,8 @@ const viewUser = require("./viewUser");
 const uploadDoc = require("./uploadDoc");
 const getDocumentData = require("./getDoc");
 const getAllData = require("./getAllData");
-const deleteDoc = require("./deleteDoc")
+const deleteDoc = require("./deleteDoc");
+const verifyUsers = require("./verifyUsers")
 
 module.exports = {
     createUser,
@@ -13,5 +14,6 @@ module.exports = {
     uploadDoc,
     getDocumentData,
     getAllData,
-    deleteDoc
+    deleteDoc,
+    verifyUsers
 };

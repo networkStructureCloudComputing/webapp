@@ -1,9 +1,9 @@
 const express = require('express');
 const fileUpload = require("express-fileupload");
+const app = express();
 const logger = require('./logger');
 const StatsD = require('statsd-client');
 sdc = new StatsD({host: 'localhost', port: 8125});
-const app = express();
 app.use(fileUpload());
 const {
     createUser,
@@ -12,11 +12,13 @@ const {
     uploadDoc,
     getDocumentData,
     getAllData,
-    deleteDoc
+    deleteDoc,
+    verifyUsers
 } = require("./controllers");
 
 
 const cors = require("cors");
+const pool = require('./db');
 
 // middleware
 app.use(cors());
@@ -30,6 +32,7 @@ app.post("/v1/documents", uploadDoc);
 app.get("/v1/documents/:doc_id", getDocumentData);
 app.get("/v1/documents", getAllData);
 app.delete("/v1/documents/:doc_id", deleteDoc);
+app.get("/v1/verifyUserEmail", verifyUsers);
 app.get("/healthz", (req, res) => {
     sdc.increment('endpoint.user.get - healthz');
     try {
@@ -43,4 +46,10 @@ app.get('*', function (req, res) {
     logger.info("Page Not Found");
     res.status(404).json("Page not found!")
 });
+app.post('*', function (req, res) {
+    sdc.increment('endpoint.user.post - wrong api');
+    logger.error("Page not found!");
+    res.status(404).json("Page not found!")
+});
+
 module.exports = app;
