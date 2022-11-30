@@ -48,3 +48,27 @@ jobs:
           packer build \
           -var "zip_file_path=/home/runner/work/webapp/webapp/codedeploy_artifact/nodeApi.zip" \
           -var-file=var.json nodeApi.pkr.hcl
+        
+      - name: AWS Configure
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY}}
+          aws-secret-access-key: ${{secrets.AWS_SECRET_KEY}}
+          aws-region: ${{secrets.AWS_REGION}}
+          
+      - name: Retrieve AMI ID
+        run: |
+          echo AMI_ID=$(jq -r '.builds[-1].artifact_id' ./packer/manifest.json | cut -d ":" -f2) >> $GITHUB_ENV
+          echo $AMI_ID
+      
+      - name: Creating launch template
+        run: |
+          aws ec2 create-launch-template-version --launch-template-name prodDemo-LaunchTemplate --source-version 1 --launch-template-data '{"ImageId":"${{env.AMI_ID}}"}'
+      
+      - name: Updating ASG
+        run: |
+          aws autoscaling update-auto-scaling-group --auto-scaling-group-name prodDemo-ASG --launch-template LaunchTemplateId=${{ secrets.AWS_LAUNCH_TEMPLATE_ID }},Version='$Latest'
+      
+      - name: Refreshing Instance
+        run: |
+          aws autoscaling start-instance-refresh --auto-scaling-group-name prodDemo-ASG
