@@ -1,6 +1,5 @@
 {
     "aws_region": "us-east-1",
-    "subnet_id": "subnet-04024e6398b622e66",
     "instance_type": "t2.micro",
     "ssh_name": "ubuntu",
     "demo_account_id": "815142323057",
