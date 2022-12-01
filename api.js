@@ -33,8 +33,8 @@ app.get("/v1/documents/:doc_id", getDocumentData);
 app.get("/v1/documents", getAllData);
 app.delete("/v1/documents/:doc_id", deleteDoc);
 app.get("/v1/verifyUserEmail", verifyUsers);
-app.get("/healthz", (req, res) => {
-    sdc.increment('endpoint.user.get - healthz');
+app.get("/health", (req, res) => {
+    sdc.increment('endpoint.user.get - health');
     try {
         logger.info("healthz api");
         res.status(200).json("server responds with 200 OK if it is healhty.")
